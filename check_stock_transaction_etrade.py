@@ -16,6 +16,7 @@ def main():
     df = df.reindex(columns=ETRADE_HEADER, fill_value=None)
 
     # Get all the dates (by hands)
+    # Crawling feature need to be implemented
     # from url = "http://www.smbs.biz/ExRate/TodayExRate.jsp"
     dates = list(set(df["Date Acquired"].tolist() + df["Date Sold"].tolist()))
     dates.sort()
