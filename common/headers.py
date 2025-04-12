@@ -1,0 +1,15 @@
+ETRADE_HEADER = [
+    "Symbol",
+    "Plan Type",
+    "Qty.",
+    "Date Acquired",
+    "ER Date Acquired (KRW)",
+    "Adjusted Cost Basis",
+    "Adjusted Cost Basis (KRW)",
+    "Date Sold",
+    "ER Date Sold (KRW)",
+    "Total Proceeds",
+    "Total Proceeds (KRW)",
+    "Adjusted Gain/Loss",
+    "Adjusted Gain/Loss (KRW)",
+]
