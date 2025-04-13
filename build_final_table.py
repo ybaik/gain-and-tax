@@ -14,11 +14,11 @@ def print_gain_tax(total_gain_loss: int) -> None:
     tax_base = max(total_gain_loss - TAX_REDUCTION, 0)
     tax = round(tax_base * TAX_RATE)
 
-    print("-"*38)
+    print("-" * 38)
     print("Total Gain/Loss\t:" + f"{total_gain_loss:,} KRW".rjust(20))
     print("Tax Base\t:" + f"{tax_base:,} KRW".rjust(20))
     print("Tax Payable\t:" + f"{tax:,} KRW".rjust(20))
-    print("-"*38)
+    print("-" * 38)
 
 
 def extract_tax_info(csv_dir: Path, output_path: Path, format_path: Path) -> None:

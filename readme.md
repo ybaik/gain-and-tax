@@ -13,6 +13,9 @@ This Python script simplifies the process of preparing income tax data for overs
 * **Python 3.10** 
 * **pandas** library:  Install with `pip install pandas`
 * **openpyxl** library:  Install with `pip install openpyxl`
+* **pathlib** library:  Install with `pip install pathlib`
+* **selenium** library:  Install with `pip install selenium`
+* **webdriver-manager** library:  Install with `pip install webdriver-manager`
 
 ##  Data Preparation
 
@@ -33,18 +36,22 @@ This Python script simplifies the process of preparing income tax data for overs
 
 3. **Exchange Rates:**
 
-    -  You will need to manually add the relevant KRW exchange rate for each date present in the E*TRADE xlsx file within the `EXRATE_DICT` dictionary in `check_stock_transaction_etrade.py`.  An automatic solution for this is planned.
+For conversions between USD and KRW, you have two options:
+
+- **Crawling:** Use an option '--use-crawling' to automatically fetch the historical exchange rates from 'http://www.smbs.biz/ExRate/TodayExRate.jsp'. Crawling results are automatically saved to the `'db/usd_krw.json'` file.
+- **Manual Entry:** If crawling is not feasible, you'll need to manually add the corresponding KRW exchange rate to the `'db/usd_krw.json'` file for each date found in the E*TRADE data. 
 
 ## Running the Scripts
 
 1. **Generate CSV Files with KRW Information for E*TRADE:**
 
     ```bash
-    python check_stock_transaction_etrade.py --file-path path/to/G&L_Collapsed.xlsx --output-path path/to/*etrade*.csv
+    python check_stock_transaction_etrade.py --file-path path/to/G&L_Collapsed.xlsx --output-path path/to/*etrade*.csv --use-crawling True
     ```
 
     - Replace `path/to/G&L_Collapsed.xlsx` with the path to your downloaded E*TRADE Excel file.
     - Replace `path/to/*etrade*.csv` with the desired output path for the generated CSV files.
+    - Replace `True` with `False` if you want to use manual entry for KRW exchange rates.
 
 2. **Generate Final Gain & Loss Table:**
 
@@ -61,5 +68,4 @@ This Python script simplifies the process of preparing income tax data for overs
 
 ##  Future Enhancements
 
-* Automatic exchange rate retrieval.
 * Save the final xlsx file is compatible with the given format from national tax service of Korea.
