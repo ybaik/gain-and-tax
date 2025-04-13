@@ -6,7 +6,7 @@ This Python script simplifies the process of preparing income tax data for overs
 
 * **Data Processing:**  Handles transaction data for E*TRADE to add KRW-based columns and save as a CSV file.
 * **Gain & Loss Calculation:**  Calculates capital gains and losses for each stock transaction.
-* **Consolidated Reporting:**  Generates a comprehensive Excel report summarizing all transactions and calculated gains/losses.
+* **Consolidated Reporting:**  Generates a comprehensive Excel report summarizing all transactions and calculated gains/losses and directly applicable to capital gains tax filing with the National Tax Service of Korea.
 
 ## Prerequisites
 
@@ -17,10 +17,9 @@ This Python script simplifies the process of preparing income tax data for overs
 
 1. **E*TRADE:**  
 
-    - Download your transaction history from the [E*TRADE website](https://us.etrade.com) as a CSV file.
-    -  The name of the CSV file should include "etrade" to be recognized.
+    -  Download your transaction history (G&L_Collapsed.xlsx) from the [E*TRADE website](https://us.etrade.com).
 
-2. **Other firms:**
+2. **Other Firms:**
 
     -  Follow each firm's specific instructions for exporting your transaction history as a CSV file.
     -  The name of the CSV file should include the firm name, e.g., "kiwoon" to be recognized.
@@ -44,7 +43,7 @@ This Python script simplifies the process of preparing income tax data for overs
     ```
 
     - Replace `path/to/G&L_Collapsed.xlsx` with the path to your downloaded E*TRADE Excel file.
-    - Replace `path/to/*etrade*.csv` with the desired output directory for the generated CSV files.
+    - Replace `path/to/*etrade*.csv` with the desired output path for the generated CSV files.
 
 2. **Generate Final Gain & Loss Table:**
 
@@ -52,7 +51,7 @@ This Python script simplifies the process of preparing income tax data for overs
     python build_final_table.py --csv-dir path/to/csv --output-path path/to/*gain_final_save.xlsx --format-path path/to/output.xlsx
     ```
 
-    - Replace `path/to/csv` with the directory containing all CSV files (E*TRADE and Kiwoom).
+    - Replace `path/to/csv` with the directory containing all CSV files (E*TRADE, Kiwoom and others).
     - Replace `path/to/*gain_final_save.xlsx` with the desired output path for the consolidated gain/loss table. 
     - Replace `path/to/output.xlsx` with the path to a template XLSX file.
 
