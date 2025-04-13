@@ -12,6 +12,7 @@ This Python script simplifies the process of preparing income tax data for overs
 
 * **Python 3.10** 
 * **pandas** library:  Install with `pip install pandas`
+* **openpyxl** library:  Install with `pip install openpyxl`
 
 ##  Data Preparation
 

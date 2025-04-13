@@ -77,10 +77,10 @@ def get_exrate(date: str) -> float:
 
 def print_gain_tax(total_gain_loss: float, total_gain_loss_krw: float) -> None:
 
-    print(f"{'-'*37}")
-    print(f"Total Gain/Loss:" + f"{total_gain_loss:,.2f} USD".rjust(20))
-    print(f"Total Gain/Loss:" + f"{round(total_gain_loss_krw):,} KRW".rjust(20))
-    print(f"{'-'*37}")
+    print("-"*37)
+    print("Total Gain/Loss:" + f"{total_gain_loss:,.2f} USD".rjust(20))
+    print("Total Gain/Loss:" + f"{round(total_gain_loss_krw):,} KRW".rjust(20))
+    print("-"*37)
 
 
 def parse_args():
