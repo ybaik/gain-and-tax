@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Python script simplifies the process of preparing income tax data for overseas securities transactions in Korea, specifically targeting transactions handled by E*TRADE and Kiwoom. It automates several key tasks:
+This Python script simplifies the process of preparing income tax data for overseas securities transactions in Korea, specifically targeting transactions handled by E*TRADE, Mirae Asset and Kiwoom. It automates several key tasks:
 
 * **Data Processing:**  Handles transaction data for E*TRADE to add KRW-based columns and save as a CSV file.
 * **Gain & Loss Calculation:**  Calculates capital gains and losses for each stock transaction.
@@ -26,12 +26,12 @@ This Python script simplifies the process of preparing income tax data for overs
 2. **Other Firms:**
 
     -  Follow each firm's specific instructions for exporting your transaction history as a CSV file.
-    -  The name of the CSV file should include the firm name, e.g., "kiwoon" to be recognized.
+    -  The name of the CSV file should include the firm name, e.g., "kiwoon", "miraeasset" to be recognized.
     -  You need to implement the parsing class in `common/data_gen.py` to add the new firm's specific CSV information.
 
 3. **Supported Firms:**
 
-    -  Currently, the script supports E*TRADE (etrade) and Kiwoom (kiwoom).
+    -  Currently, the script supports E*TRADE (etrade), Kiwoom (kiwoon), and Mirae Asset (miraeasset).
     
 
 3. **Exchange Rates:**
@@ -59,7 +59,7 @@ For conversions between USD and KRW, you have two options:
     python build_final_table.py --csv-dir path/to/csv --output-path path/to/*gain_final_save.xlsx --format-path path/to/output.xlsx
     ```
 
-    - Replace `path/to/csv` with the directory containing all CSV files (E*TRADE, Kiwoom and others).
+    - Replace `path/to/csv` with the directory containing all CSV files (E*TRADE, Kiwoom, Mirae Asset and others).
     - Replace `path/to/*gain_final_save.xlsx` with the desired output path for the consolidated gain/loss table. 
     - Replace `path/to/output.xlsx` with the path to a template XLSX file.
 
