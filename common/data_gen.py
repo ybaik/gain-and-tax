@@ -8,7 +8,10 @@ def create_data_gen(file_path: Path) -> None:
         return DataGenKiwoom(file_path)
     elif "etrade" in file_path.stem:
         return DataGenETrade(file_path)
+    elif "miraeasset" in file_path.stem:
+        return DataGenMiraeAsset(file_path)
     else:
+        print(f"Unknown firm type: {file_path.stem}")
         return None
 
 
@@ -56,7 +59,7 @@ class DataGenETrade(DataGen):
     def gen_data(self):
 
         output_list = []
-        for i, row in self.df.iterrows():
+        for _, row in self.df.iterrows():
             info_basic = self._get_basic_info()
             info_basic["주식 종목명"] = "퀄컴"
             info_basic["취득유형별\n양도주식 수"] = convert_to_amount(row["Qty."])
@@ -87,7 +90,7 @@ class DataGenKiwoom(DataGen):
     def gen_data(self):
 
         output_list = []
-        for i, row in self.df.iterrows():
+        for _, row in self.df.iterrows():
             info_basic = self._get_basic_info()
             info_basic["주식 종목명"] = row["종목명"]
             info_basic["취득유형별\n양도주식 수"] = convert_to_amount(row["매도수량"])
@@ -97,6 +100,30 @@ class DataGenKiwoom(DataGen):
             info_basic["취득가액"] = convert_to_amount(row["매수금액"])
             info_basic["필요경비"] = convert_to_amount(row["필요경비"])
             info_basic["국제증권식별번호\n(ISIN코드)"] = row["종목코드"]
+            output_list.append(info_basic)
+
+        return output_list
+
+
+class DataGenMiraeAsset(DataGen):
+    def __init__(self, filepath: Path) -> None:
+        super().__init__(filepath)
+        df = pd.read_csv(filepath, encoding="euc-kr")
+        self.df = df.dropna(axis=0, how="any")
+
+    def gen_data(self):
+
+        output_list = []
+        for _, row in self.df.iterrows():
+            info_basic = self._get_basic_info()
+            info_basic["주식 종목명"] = row["종목명"]
+            info_basic["취득유형별\n양도주식 수"] = convert_to_amount(row["양도주식수"])
+            info_basic["양도일자"] = row["양도일자"]
+            info_basic["양도가액"] = convert_to_amount(row["양도가액(원)"])
+            info_basic["취득일자"] = row["취득일자"]
+            info_basic["취득가액"] = convert_to_amount(row["취득가액(원)"])
+            info_basic["필요경비"] = convert_to_amount(row["필요경비(원)"])
+            info_basic["국제증권식별번호\n(ISIN코드)"] = row["표준종목번호"]
             output_list.append(info_basic)
 
         return output_list

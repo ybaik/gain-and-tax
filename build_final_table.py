@@ -34,8 +34,9 @@ def extract_tax_info(csv_dir: Path, output_path: Path, format_path: Path) -> Non
     # Read CSV files
     for input_csv_path in csv_dir.glob("*.csv"):
         brokerage_firm = create_data_gen(input_csv_path)
-        data = brokerage_firm.gen_data()
-        df_raw = pd.concat([df_raw, pd.DataFrame(data)], ignore_index=True)
+        if brokerage_firm is not None:
+            data = brokerage_firm.gen_data()
+            df_raw = pd.concat([df_raw, pd.DataFrame(data)], ignore_index=True)
 
     # Check total gain/loss and tax
     total_gain_loss = (
