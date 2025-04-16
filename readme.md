@@ -14,6 +14,7 @@ This Python script simplifies the process of preparing income tax data for overs
 * **pandas** library:  Install with `pip install pandas`
 * **openpyxl** library:  Install with `pip install openpyxl`
 * **pathlib** library:  Install with `pip install pathlib`
+* **rich** library:  Install with `pip install rich`
 * **selenium** library:  Install with `pip install selenium`
 * **webdriver-manager** library:  Install with `pip install webdriver-manager`
 

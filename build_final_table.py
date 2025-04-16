@@ -2,6 +2,8 @@ import argparse
 import pandas as pd
 from pathlib import Path
 from common.data_gen import create_data_gen
+from rich.table import Table
+from rich.console import Console
 
 
 DEBUG = False
@@ -11,14 +13,20 @@ TAX_REDUCTION = 2500000
 
 
 def print_gain_tax(total_gain_loss: int) -> None:
+
     tax_base = max(total_gain_loss - TAX_REDUCTION, 0)
     tax = round(tax_base * TAX_RATE)
 
-    print("-" * 38)
-    print("Total Gain/Loss\t:" + f"{total_gain_loss:,} KRW".rjust(20))
-    print("Tax Base\t:" + f"{tax_base:,} KRW".rjust(20))
-    print("Tax Payable\t:" + f"{tax:,} KRW".rjust(20))
-    print("-" * 38)
+    console = Console()
+    table = Table()
+    table.add_column("")
+    table.add_column("", justify="right", width=20)
+    table.show_header = False
+    table.add_row("Total Gain/Loss", f"{total_gain_loss:,} KRW")
+    table.add_row("Tax Base", f"{tax_base:,} KRW")
+    table.add_row("[yellow]Tax Payable[/yellow]", f"[yellow]{tax:,} KRW[/yellow]")
+
+    console.print(table)
 
 
 def extract_tax_info(csv_dir: Path, output_path: Path, format_path: Path) -> None:

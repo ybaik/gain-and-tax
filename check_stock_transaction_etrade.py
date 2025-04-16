@@ -6,6 +6,9 @@ import pandas as pd
 from pathlib import Path
 from common.headers import ETRADE_HEADER
 from common.crawler import Crawler
+from rich import print
+from rich.table import Table
+from rich.console import Console
 
 
 DEBUG = False
@@ -99,14 +102,26 @@ def get_exrate(date: str, USD_KRW_DB: dict) -> float:
         raise AssertionError(f"Date {date} not found in USD_KRW_DB")
 
 
-def print_gain_tax(total_gain_loss: float, total_gain_loss_krw: float) -> None:
+def print_gain_tax(total_gain_loss_usd: float, total_gain_loss_krw: float) -> None:
+    console = Console()
 
-    print("-" * 37)
-    print("Total Gain/Loss:" + f"{total_gain_loss:,.2f} USD".rjust(20))
-    print("Total Gain/Loss:" + f"{round(total_gain_loss_krw):,} KRW".rjust(20))
-    print("-" * 37)
+    table = Table(title="E*Trade")
+    table.add_column("Currency", style="bold", justify="center")
+    table.add_column("Total Gain/Loss", justify="right")
 
+    msg = f"[red]{total_gain_loss_usd:,.2f}[/red]"
+    if total_gain_loss_usd >= 0:
+        msg = msg.replace("red]", "green]")
+    table.add_row("USD", msg)
 
+    msg = f"[red]{round(total_gain_loss_krw):,}[/red]"
+    if total_gain_loss_krw >= 0:
+        msg  =msg.replace("red]", "green]")
+    table.add_row("KRW", msg)
+
+    console.print(table)
+
+        
 def parse_args():
     """Parses command-line arguments for file paths."""
     parser = argparse.ArgumentParser()
