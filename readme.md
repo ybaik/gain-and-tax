@@ -62,7 +62,8 @@ For conversions between USD and KRW, you have two options:
 
     - Replace `path/to/csv` with the directory containing all CSV files (E*TRADE, Kiwoom, Mirae Asset and others).
     - Replace `path/to/*gain_final_save.xlsx` with the desired output path for the consolidated gain/loss table. 
-    - Replace `path/to/output.xlsx` with the path to a template XLSX file (format/2024_gain_final.xlsx could be used).
+    - Replace `path/to/output.xlsx` with the path to a template XLSX file
+       - './format/2024_gain_final.xlsx' could be used.
 
      - **Note:** 
        - The contents of the output XLSX file produced by `build_final_table.py` should be copied and pasted into your preferred final file format (e.g., an Excel workbook). 
