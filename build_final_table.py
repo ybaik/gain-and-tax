@@ -8,7 +8,8 @@ from rich.console import Console
 
 DEBUG = False
 
-TAX_RATE = 0.22
+TAX_RATE = 0.20
+TAX_RATE_LOCAL =  0.02
 TAX_REDUCTION = 2500000
 
 
@@ -16,6 +17,7 @@ def print_gain_tax(total_gain_loss: int) -> None:
 
     tax_base = max(total_gain_loss - TAX_REDUCTION, 0)
     tax = round(tax_base * TAX_RATE)
+    tax_local = round(tax_base * TAX_RATE_LOCAL)
 
     console = Console()
     table = Table()
@@ -25,6 +27,8 @@ def print_gain_tax(total_gain_loss: int) -> None:
     table.add_row("Total Gain/Loss", f"{total_gain_loss:,} KRW")
     table.add_row("Tax Base", f"{tax_base:,} KRW")
     table.add_row("[yellow]Tax Payable[/yellow]", f"[yellow]{tax:,} KRW[/yellow]")
+    table.add_row("[yellow]Tax Payable Local[/yellow]", f"[yellow]{tax_local:,} KRW[/yellow]")
+    table.add_row("[yellow]Tax Payable Total[/yellow]", f"[yellow]{tax+tax_local:,} KRW[/yellow]")
 
     console.print(table)
 
@@ -74,7 +78,7 @@ if __name__ == "__main__":
     if DEBUG:
         # In debug mode, use a specific file and year
         year = 2024
-        base_dir = Path(f"{year}")
+        base_dir = Path(f"{year}_real")
         csv_dir = base_dir
         output_path = base_dir / f"{year}_gain_final_save.xlsx"
         format_path = Path("format/2024_gain_final.xlsx")
