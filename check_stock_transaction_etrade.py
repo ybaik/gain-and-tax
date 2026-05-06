@@ -38,6 +38,7 @@ def add_KRW_info(file_path: str, output_path: str, use_crawling: bool) -> None:
 
     # Filter out empty rows and ensure consistent column names
     df = df_raw.dropna(axis=0, how="any")
+    df = df.rename(columns={"Quantity": "Qty."})  # from 2025
     df = df.reindex(columns=ETRADE_HEADER, fill_value=None)
 
     # Fetch historical KRW exchange rates from the USD_KRW_DB (by hands or web crawling)
@@ -116,12 +117,12 @@ def print_gain_tax(total_gain_loss_usd: float, total_gain_loss_krw: float) -> No
 
     msg = f"[red]{round(total_gain_loss_krw):,}[/red]"
     if total_gain_loss_krw >= 0:
-        msg  =msg.replace("red]", "green]")
+        msg = msg.replace("red]", "green]")
     table.add_row("KRW", msg)
 
     console.print(table)
 
-        
+
 def parse_args():
     """Parses command-line arguments for file paths."""
     parser = argparse.ArgumentParser()
@@ -149,10 +150,9 @@ def parse_args():
 
 
 if __name__ == "__main__":
-
     if DEBUG:
         # In debug mode, use a specific file and year
-        year = 2024
+        year = 2025
         base_dir = f"{year}"
         file_path = f"{base_dir}/{year}_G&L_Collapsed.xlsx"
         output_path = f"{base_dir}/{year}_etrade.csv"
